@@ -1,0 +1,26 @@
+version: '3'
+
+networks:
+ monreseauprive:
+  driver: bridge
+
+
+services:
+  mon_serveur_redis:
+   image: redis/redis-stack:latest
+   volumes:
+    - ./dataredis:/data
+   environment:
+    REDIS_ARGS: "--save 10 1"
+   networks:
+    - monreseauprive
+
+
+  mon_site_web_flask:
+    build: .
+    ports:
+     - 8800:8000
+    environment:
+      FLASK_ENV: development
+    networks:
+    - monreseauprive
