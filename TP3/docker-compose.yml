@@ -8,6 +8,8 @@ networks:
 services:
   mon_serveur_redis:
    image: redis/redis-stack:latest
+   deploy:
+       replicas: 3
    volumes:
     - ./dataredis:/data
    environment:
@@ -17,7 +19,9 @@ services:
 
 
   mon_site_web_flask:
-    build: .
+    image: yannisbre/mon_site_web_flask
+    deploy :
+        replicas: 3
     ports:
      - 8800:8000
     environment:
