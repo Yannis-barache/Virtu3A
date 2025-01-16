@@ -1,7 +1,7 @@
 version: '3'
 services:
     traefik:
-        image: p4179-167:5000/traefik
+        image: traefik
         container_name: traefik
         command:
             - "--api.insecure=true"
