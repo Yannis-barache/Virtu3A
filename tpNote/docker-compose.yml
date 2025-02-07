@@ -94,16 +94,19 @@ services:
             context: ./flask_2A
             dockerfile: Dockerfile
 
+        ports:
+            -   "8800:8000"
         labels:
             - "traefik.enable=true"
             - "traefik.http.routers.flask.rule=Host(`flask.localhost`)"
-            - "traefik.http.services.flask.loadbalancer.server.port=8000"
+            - "traefik.http.routers.flask.entrypoints=web"
+
         environment:
             FLASK_ENV: development
         networks:
             - mon_reseau
         depends_on:
-            -   traefik
+            - mon_serveur_redis
 
 
 # Définir le réseau

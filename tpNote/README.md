@@ -38,9 +38,3 @@ curl http://flask.localhost/kv/1/ma_cle
 curl -X DELETE http://flask.localhost/kv/1/ma_cle
 ```
 
-#### GET de toutes les valeurs
-
-```bash
-curl http://flask.localhost/kv/1
-```
-
