@@ -46,7 +46,7 @@ services:
         image: php:7.4-apache
         container_name: mon-serveur-web
         volumes:
-          - ./index.php:/var/www/html/index.php
+          - ./php/index.php:/var/www/html/index.php
         labels:
           - "traefik.enable=true"
           - "traefik.http.routers.mon-serveur-web.rule=Host(`utilisateurs.localhost`)"
@@ -68,8 +68,9 @@ services:
 
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.mon-serveur-web.rule=Host(`fortune.localhost`)"
-            - "traefik.http.services.mon-serveur-web.loadbalancer.server.port=80"
+            - "traefik.http.routers.app-fortune.rule=Host(`fortune.localhost`)"
+            - "traefik.http.services.app-fortune.loadbalancer.server.port=80"
+
         networks:
             - mon_reseau
 
