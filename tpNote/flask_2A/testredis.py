@@ -5,6 +5,11 @@ import json
 from flask import Flask, redirect, url_for, request, Response, jsonify
 app = Flask(__name__)
 
+
+@app.route('/', methods= ['GET'])
+def accueil():
+    return jsonify("Bienvenue sur l'API"
+
 @app.route('/kv/<string:i>/<string:k>',defaults={'v': None}, methods=['POST', 'GET', 'DELETE', 'PUT'])
 @app.route('/kv/<string:i>/<string:k>/<string:v>',           methods=['POST', 'GET', 'DELETE', 'PUT'])
 def kv(i:str,k:str,v:str):
@@ -46,7 +51,7 @@ def kv(i:str,k:str,v:str):
 
 
 if __name__ == '__main__':
-    redis = redis.Redis(host='mon_serveur_redis', port=6379, db=0)
+    redis = redis.Redis(host='mon_serveur_redis', port=6399, db=0)
     can_ping = False
     while can_ping == False:
         try:

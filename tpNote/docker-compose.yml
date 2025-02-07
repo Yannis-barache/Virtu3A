@@ -74,6 +74,35 @@ services:
         networks:
             - mon_reseau
 
+
+    mon_serveur_redis:
+        image: redis/redis-stack:latest
+        volumes:
+            - ./dataredis:/data
+        ports:
+            -   "6399:6379"
+        environment:
+            REDIS_ARGS: "--save 10 1"
+        networks:
+            - mon_reseau
+        depends_on:
+            -   traefik
+
+
+    mon_site_web_flask:
+        image: yannisbre/mon_site_web_flask
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.flask.rule=Host(`flask.localhost`)"
+            - "traefik.http.services.flask.loadbalancer.server.port=8000"
+        environment:
+            FLASK_ENV: development
+        networks:
+            - mon_reseau
+        depends_on:
+            -   traefik
+
+
 # Définir le réseau
 networks:
     mon_reseau:
