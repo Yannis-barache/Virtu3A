@@ -90,7 +90,10 @@ services:
 
 
     mon_site_web_flask:
-        image: yannisbre/mon_site_web_flask
+        build:
+            context: ./flask_2A
+            dockerfile: Dockerfile
+
         labels:
             - "traefik.enable=true"
             - "traefik.http.routers.flask.rule=Host(`flask.localhost`)"
